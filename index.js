@@ -1,6 +1,6 @@
 'use strict';
 
-const typeHardening =  new (require('typeHardening')).typeHardeningBase();
+const typeHardening =  new (require('typehardeningrc')).typeHardeningBase();
 
 const setupBase = function (setupIn){
     this.get = function(type){
@@ -13,6 +13,7 @@ const setupBase = function (setupIn){
     this.setup = function(settings){
         for(let i in settings)
             set(i, settings[i]);
+        return true;
     };
     this.set = function(type, value){
         if(typeof type === 'undefined')
@@ -30,9 +31,10 @@ const setupBase = function (setupIn){
         return true;
     };
     let setup = {};
-    let setuTypes = setupIn;
+    let setupTypes = setupIn;
     for (let i in setupTypes)
-        setup[i] = setupTypes[i]['default'];
+        if(typeof setupTypes[i]['default'] !== 'undefined')
+            setup[i] = setupTypes[i]['default'];
 };
 
 exports.setupBase = setupBase;
