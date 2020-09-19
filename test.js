@@ -372,7 +372,7 @@ nanoTest.add(
 );
 
 nanoTest.add(
-    'check get list',
+    'check set list',
     {
         'function':setup.setup,
         'options' :[
@@ -384,6 +384,23 @@ nanoTest.add(
     },
     '===',
     true
+
+);
+
+
+nanoTest.add(
+    'check set list fail',
+    {
+        'function':setup.setup,
+        'options' :[
+            {
+                'testFloat'  : 'fail',
+                'testString' : 'hu'
+            }
+        ]
+    },
+    '===',
+    false
 
 );
 
