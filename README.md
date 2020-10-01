@@ -1,6 +1,6 @@
 # About 
 
-The SteuprRC is a hard typed setup object holder. Nothinng more.
+The SetuprRC is a hard typed setup object holder. Nothing more.
 
 # init 
 
@@ -25,7 +25,7 @@ const setup = new  setupBase({
 #basic usage 
 
 
-set value 
+Set a value 
 
 ```javascript 
 
@@ -37,7 +37,7 @@ setup.set(
 // return with boolean true or false
 
 ```
-get value
+Get a value
 
 ```javascript
 
