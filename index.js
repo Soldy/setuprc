@@ -50,7 +50,7 @@ const setupBase = function (setupIn){
      * @private
      * @return {any}
      */
-    let set = function(type, value){
+    const set = function(type, value){
         if(typeof setupTypes[type] === 'undefined')
             return false;
         if(typeHardening.check(setupTypes[type], value) === false)
