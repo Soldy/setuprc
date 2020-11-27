@@ -22,10 +22,10 @@ const setup = new  setupBase({
 
 ```
 
-#basic usage 
+# basic usage 
 
 
-Set a value 
+## Set a value 
 
 ```javascript 
 
@@ -37,7 +37,7 @@ setup.set(
 // return with boolean true or false
 
 ```
-Get a value
+## Get a value
 
 ```javascript
 
