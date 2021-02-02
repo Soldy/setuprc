@@ -6,7 +6,7 @@ The SetuprRC is a hard typed setup object holder. Nothing more.
 
 ```javascript 
 
-const setup = new  setupBase({
+const setup = new  (require('setuprc')).base({
     'testString':{ // setup option
         'type'    : 'string', //  typeHardening type 
         'default' : 'value'   // default value

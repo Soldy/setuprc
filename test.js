@@ -6,7 +6,7 @@ const nanoTest  = new (require('nanoTest')).test({
     'debugPrint' : 'short'
 });
 
-const setupBase =  (require('./index.js')).setupBase;
+const setupBase =  (require('./index.js')).base;
 const setup = new  setupBase({
     'testNoDefault':{
         'type'    : 'string'

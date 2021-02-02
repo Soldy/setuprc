@@ -77,4 +77,4 @@ const setupBase = function (setupIn){
             setup[i] = setupTypes[i]['default'];
 };
 
-exports.setupBase = setupBase;
+exports.base = setupBase;
