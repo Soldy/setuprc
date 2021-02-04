@@ -54,6 +54,7 @@ dist
 .jshintrc
 .travis.yml
 .gitattributes
+.github/
 eslint.sh
 
 .vuepress/dist
