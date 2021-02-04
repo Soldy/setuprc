@@ -1,6 +1,6 @@
 {
   "name": "setuprc",
-  "version": "0.9.9-beta6",
+  "version": "0.9.9-beta7",
   "description": "setup manager",
   "main": "index.js",
   "scripts": {
@@ -22,6 +22,6 @@
     "nanoTest": "^0.9.9-beta9"
   },
   "dependencies": {
-    "typehardeningrc": "^0.9.9-beta5"
+    "typehardeningrc": "^0.9.9-beta6"
   }
 }
