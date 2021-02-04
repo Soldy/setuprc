@@ -1,6 +1,9 @@
+/*
+ *  @Soldy\setuprc\2021.02.04\GPL3
+ */
 'use strict';
 
-const typeHardening =  new (require('typehardeningrc')).typeHardeningBase();
+const typeHardening =  new (require('typehardeningrc')).base();
 
 const setupBase = function (setupIn){
     /*
@@ -42,6 +45,16 @@ const setupBase = function (setupIn){
         if(typeof value === 'undefined')
             return false;
         return set(type,value);
+    };
+    /*
+     * @public
+     * @return {object}
+     */
+    this.all = function(){
+        let out = {};
+        for(let i in settings)
+            out[i] = settings[i];
+        return out;
     };
     /*
      * set on option function
