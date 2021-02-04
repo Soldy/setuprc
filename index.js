@@ -52,8 +52,8 @@ const setupBase = function (setupIn){
      */
     this.all = function(){
         let out = {};
-        for(let i in settings)
-            out[i] = settings[i];
+        for(let i in setup)
+            out[i] = setup[i];
         return out;
     };
     /*
