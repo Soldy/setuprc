@@ -37,6 +37,7 @@ setup.set(
 // return with boolean true or false
 
 ```
+
 ## Get a value
 
 ```javascript
@@ -47,5 +48,16 @@ setup.get(
 );
 
 // return  with the setting option.
+
+```
+
+## all value 
+
+```javascript
+
+
+setup.all();
+
+// return  fill setup option
 
 ```
