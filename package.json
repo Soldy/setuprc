@@ -1,6 +1,6 @@
 {
   "name": "setuprc",
-  "version": "0.9.9-beta7",
+  "version": "0.9.9-beta10",
   "description": "setup manager",
   "main": "index.js",
   "scripts": {
@@ -19,9 +19,9 @@
   "homepage": "https://github.com/Soldy/setuprc#readme",
   "devDependencies": {
     "interactiveConsole": "0.0.7-alpha0",
-    "nanoTest": "^0.9.9-beta9"
+    "nanoTest": "^0.9.9-beta10"
   },
   "dependencies": {
-    "typehardeningrc": "^0.9.9-beta6"
+    "typehardeningrc": "^0.9.9-beta10"
   }
 }
