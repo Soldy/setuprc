@@ -1,4 +1,0 @@
-#!/usr/bin/nodejs
-
-require('./test.js');
-
