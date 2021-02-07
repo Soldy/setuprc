@@ -27,6 +27,8 @@ const setupBase = function (setupIn){
      */
     this.setup = function(settings){
         let out = true;
+        if(typeof settings.all === 'function')
+            settings = setting.all();
         for(let i in settings)
             if(set(i, settings[i]) === false)
                 out = false;
