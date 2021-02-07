@@ -1,6 +1,6 @@
 {
   "name": "setuprc",
-  "version": "0.9.9-beta10",
+  "version": "0.9.9-beta15",
   "description": "setup manager",
   "main": "index.js",
   "scripts": {
@@ -18,10 +18,14 @@
   },
   "homepage": "https://github.com/Soldy/setuprc#readme",
   "devDependencies": {
-    "interactiveConsole": "0.0.7-alpha0",
-    "nanoTest": "^0.9.9-beta10"
+    "assertrc": "^1.0.2-rc2",
+    "consolebarrc": "0.0.2-rc2",
+    "consolestdiorc": "0.0.2-rc1",
+    "consolestylerc": "0.0.2-rc1",
+    "nano-test-output-cli": "^0.9.9-beta16",
+    "nanoTest": "^0.9.9-beta15",
+    "sandboxrc": "^0.9.9-beta11",
+    "typehardeningrc": "^0.9.9-beta11"
   },
-  "dependencies": {
-    "typehardeningrc": "^0.9.9-beta10"
-  }
+  "dependencies": {}
 }
