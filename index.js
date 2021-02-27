@@ -4,8 +4,10 @@
 'use strict';
 
 const typeHardening =  new (require('typehardeningrc')).base();
-
-const setupBase = function (setupIn){
+/*
+ * @prototype
+ */
+const SetupBase = function (setup_in){
     /*
      * get option value
      * @param {string} value
@@ -15,9 +17,9 @@ const setupBase = function (setupIn){
     this.get = function(type){
         if(typeof type === 'undefined')
             return false;
-        if(typeof setup[type] === 'undefined')
+        if(typeof _setup[type] === 'undefined')
             return false;
-        return setup[type];
+        return _setup[type];
     };
     /*
      * set multiple options interface
@@ -30,7 +32,7 @@ const setupBase = function (setupIn){
         if(typeof settings.all === 'function')
             settings = setting.all();
         for(let i in settings)
-            if(set(i, settings[i]) === false)
+            if(_set(i, settings[i]) === false)
                 out = false;
         return out;
     };
@@ -46,7 +48,7 @@ const setupBase = function (setupIn){
             return false;
         if(typeof value === 'undefined')
             return false;
-        return set(type,value);
+        return _set(type,value);
     };
     /*
      * @public
@@ -54,8 +56,8 @@ const setupBase = function (setupIn){
      */
     this.all = function(){
         let out = {};
-        for(let i in setup)
-            out[i] = setup[i];
+        for(let i in _setup)
+            out[i] = _setup[i];
         return out;
     };
     /*
@@ -65,31 +67,36 @@ const setupBase = function (setupIn){
      * @private
      * @return {any}
      */
-    const set = function(type, value){
-        if(typeof setupTypes[type] === 'undefined')
+    const _set = function(type, value){
+        if(typeof _setup_types[type] === 'undefined')
             return false;
-        if(typeHardening.check(setupTypes[type], value) === false)
+        if (
+            typeHardening.check(
+                _setup_types[type], 
+                value
+              ) === false
+        )
             return false;
-        setup[type] = value;
+        _setup[type] = value;
         return true;
     };
     /*
      * @private
      * @var {object}
      */
-    let setup = {};
+    let _setup = {};
     /*
      * @private
      * @var {object}
      */
-    let setupTypes = setupIn;
+    let _setup_types = setup_in;
     /*
      * @private
      * @var {object}
      */
-    for (let i in setupTypes)
-        if(typeof setupTypes[i]['default'] !== 'undefined')
-            setup[i] = setupTypes[i]['default'];
+    for (let i in _setup_types)
+        if(typeof _setup_types[i]['default'] !== 'undefined')
+            _setup[i] = _setup_types[i]['default'];
 };
 
-exports.base = setupBase;
+exports.base = SetupBase;
