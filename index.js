@@ -3,7 +3,7 @@
  */
 'use strict';
 
-const typeHardening =  new (require('typehardeningrc')).base();
+const $typeHardening =  new (require('typehardeningrc')).base();
 /*
  * @prototype
  */
@@ -71,7 +71,7 @@ const SetupBase = function (setup_in){
         if(typeof _setup_types[type] === 'undefined')
             return false;
         if (
-            typeHardening.check(
+            $typeHardening.check(
                 _setup_types[type], 
                 value
               ) === false
