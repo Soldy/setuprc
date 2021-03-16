@@ -30,7 +30,7 @@ const SetupBase = function (setup_in){
     this.setup = function(settings){
         let out = true;
         if(typeof settings.all === 'function')
-            settings = setting.all();
+            settings = settings.all();
         for(let i in settings)
             if(_set(i, settings[i]) === false)
                 out = false;
@@ -68,17 +68,38 @@ const SetupBase = function (setup_in){
      * @return {any}
      */
     const _set = function(type, value){
-        if(typeof _setup_types[type] === 'undefined')
+        if (
+            ( _setup_types[type]['set'] ) &&
+             ( _setup_types[type]['const'] )
+        )
+            return false;
+        if ( typeof _setup_types[type] === 'undefined')
             return false;
         if (
             $typeHardening.check(
                 _setup_types[type], 
                 value
-              ) === false
+            ) === false
         )
             return false;
         _setup[type] = value;
+        _setup_types[type]['set'] = true;
         return true;
+    };
+    /*
+     * @param {object} type 
+     * @private
+     */
+    const _typeExtend = function(type){
+        if ( typeof type['const'] !== 'boolean' )
+            type['const'] = false;
+        if ( typeof type['set'] !== 'boolean' )
+            type['set'] = false;
+        if ( typeof type['default'] !== 'undefined' )
+            type['default'] =  $typeHardening.getDefault(
+                type
+            );
+        return type;
     };
     /*
      * @private
@@ -94,9 +115,13 @@ const SetupBase = function (setup_in){
      * @private
      * @var {object}
      */
-    for (let i in _setup_types)
+    for (let i in _setup_types){
+        _setup_types[i] = _typeExtend(
+            _setup_types[i]
+        );
         if(typeof _setup_types[i]['default'] !== 'undefined')
             _setup[i] = _setup_types[i]['default'];
+    }
 };
 
 exports.base = SetupBase;
