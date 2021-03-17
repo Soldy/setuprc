@@ -68,12 +68,12 @@ const SetupBase = function (setup_in){
      * @return {any}
      */
     const _set = function(type, value){
+        if ( typeof _setup_types[type] === 'undefined')
+            return false;
         if (
             ( _setup_types[type]['set'] ) &&
-             ( _setup_types[type]['const'] )
+            ( _setup_types[type]['const'] )
         )
-            return false;
-        if ( typeof _setup_types[type] === 'undefined')
             return false;
         if (
             $typeHardening.check(
