@@ -95,10 +95,7 @@ const SetupBase = function (setup_in){
             type['const'] = false;
         if ( typeof type['set'] !== 'boolean' )
             type['set'] = false;
-        if ( typeof type['default'] !== 'undefined' )
-            type['default'] =  $typeHardening.getDefault(
-                type
-            );
+        type['default'] = $typeHardening.getDefault(type);
         return type;
     };
     /*
