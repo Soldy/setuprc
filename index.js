@@ -68,26 +68,38 @@ const SetupBase = function (setup_in){
      * @return {any}
      */
     const _set = function(type, value){
+        // set not exist
         if ( typeof _setup_types[type] === 'undefined')
-            return false;
+            throw Error('Setup option not exist');
+        // is constant ? 
         if (
             ( _setup_types[type]['set'] ) &&
             ( _setup_types[type]['const'] )
         )
-            return false;
+            return Error('');
+
+        // type check 
         if (
             $typeHardening.check(
                 _setup_types[type], 
                 value
             ) === false
         )
-            return false;
+            throw TypeError(
+                'The type is  "'+
+                (typeof value)+
+                '" but "'+
+                _setup_types[type]+
+                '" requested'
+            );
+        // type set
         _setup[type] = value;
         _setup_types[type]['set'] = true;
         return true;
     };
     /*
-     * @param {object} type 
+     * short deffination extender
+     * @param {object} type
      * @private
      */
     const _typeExtend = function(type){
