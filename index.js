@@ -3,6 +3,7 @@
  */
 'use strict';
 
+const $clonerc = new (require('clonerc')).base();
 const $typeHardening =  new (require('typehardeningrc')).base();
 /*
  * @prototype
@@ -14,12 +15,18 @@ const SetupBase = function (setup_in){
      * @public
      * @return {ann}
      */
-    this.get = function(type){
-        if(typeof type === 'undefined')
-            return false;
-        if(typeof _setup[type] === 'undefined')
-            return false;
-        return _setup[type];
+    this.get = function(name){
+        if(typeof name === 'undefined')
+            throw Error(
+                'Undefined setup option name'
+            );
+        if(typeof _setup[name] === 'undefined')
+            return Error(
+                'Undefined setup option'
+            );
+        return $clonerc.faster(
+            _setup[name]
+        );
     };
     /*
      * set multiple options interface
@@ -57,7 +64,9 @@ const SetupBase = function (setup_in){
     this.all = function(){
         let out = {};
         for(let i in _setup)
-            out[i] = _setup[i];
+            out[i] = $clonerc.faster(
+                _setup[i]
+            );
         return out;
     };
     /*
@@ -81,7 +90,7 @@ const SetupBase = function (setup_in){
         // type check 
         if (
             $typeHardening.check(
-                _setup_types[type], 
+                _setup_types[type],
                 value
             ) === false
         )
@@ -93,7 +102,7 @@ const SetupBase = function (setup_in){
                 '" requested'
             );
         // type set
-        _setup[type] = value;
+        _setup[type] = $clonerc.faster(value);
         _setup_types[type]['set'] = true;
         return true;
     };
