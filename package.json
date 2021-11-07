@@ -1,6 +1,6 @@
 {
   "name": "setuprc",
-  "version": "0.9.9-beta19",
+  "version": "0.9.9-beta20",
   "description": "setup manager",
   "main": "index.js",
   "scripts": {
@@ -18,7 +18,8 @@
   },
   "homepage": "https://github.com/Soldy/setuprc#readme",
   "devDependencies": {
-    "nanoTest": "0.9.9-beta17c"
+    "clonerc": "0.0.4",
+    "nanoTest": "0.9.9-beta20"
   },
   "dependencies": {
     "typehardeningrc": "0.9.9-beta19"
