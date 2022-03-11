@@ -3,10 +3,13 @@
 'use strict';
 
 const nanoTest  = new (require('nanoTest')).test({
-    'debugPrint' : 'short'
+    'progress_bar' : false,
+    'debug_print' : 'short'
 });
 
 const setupBase =  (require('./index.js')).base;
+
+
 const setup = new  setupBase({
     'testNoDefault':{
         'type'    : 'string'
@@ -40,6 +43,8 @@ const setup = new  setupBase({
 
 });
 
+console.log('Should be 5 error messages in here:');
+
 nanoTest.add(
     'empty setup call',
     {
@@ -62,8 +67,7 @@ nanoTest.add(
         'options' :[
         ]
     },
-    '===',
-    false 
+    'error'
 );
 
 nanoTest.add(
@@ -95,12 +99,11 @@ nanoTest.add(
     {
         'function':setup.set,
         'options' :[
-            'not esizt type',
+            'not exist type',
             'ff'
         ]
     },
-    '===',
-    false 
+    'error'
 );
 
 nanoTest.add(
@@ -112,8 +115,7 @@ nanoTest.add(
             'hopp that string'
         ]
     },
-    '===',
-    false 
+    'error'
 );
 
 nanoTest.add(
@@ -124,8 +126,7 @@ nanoTest.add(
             'some nothing'
         ]
     },
-    '===',
-    false 
+    'error'
 );
 
 nanoTest.add(
@@ -399,9 +400,7 @@ nanoTest.add(
             }
         ]
     },
-    '===',
-    false
-
+    'error'
 );
 
 

@@ -21,7 +21,7 @@ const SetupBase = function (setup_in){
                 'Undefined setup option name'
             );
         if(typeof _setup[name] === 'undefined')
-            return Error(
+            throw Error(
                 'Undefined setup option'
             );
         return $clonerc.faster(
