@@ -61,3 +61,12 @@ setup.all();
 // return  fill setup option
 
 ```
+## Reset all value to default 
+
+```javascript
+
+
+setup.reset();
+
+
+```
