@@ -70,6 +70,13 @@ const SetupBase = function (setup_in){
         return out;
     };
     /*
+     * @public
+     * @return {void}
+     */
+    this.reset = function(){
+        return _reset();
+    };
+    /*
      * set on option function
      * @param {string} type 
      * @param {any} value
@@ -106,6 +113,19 @@ const SetupBase = function (setup_in){
         _setup_types[type]['set'] = true;
         return true;
     };
+    /*
+     * @private
+     * @return {void}
+     */
+    const _reset = function(){
+        for (let i in _setup_types)
+            _set(
+                i,
+                $typeHardening.getDefault(
+                    _setup_types[i]
+                )
+            );
+    }
     /*
      * short deffination extender
      * @param {object} type
