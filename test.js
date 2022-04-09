@@ -404,6 +404,88 @@ nanoTest.add(
 );
 
 
+nanoTest.add(
+    'reset',
+    {
+        'function':setup.reset,
+        'options' :[]
+    },
+    '!error'
+);
+
+nanoTest.add(
+    'check get string',
+    {
+        'function':setup.get,
+        'options' :[
+            'testString'
+        ]
+    },
+    '===',
+    'value'
+);
+
+
+nanoTest.add(
+    'check get integer',
+    {
+        'function':setup.get,
+        'options' :[
+            'testInteger'
+        ]
+    },
+    '===',
+    3
+);
+
+nanoTest.add(
+    'check get float',
+    {
+        'function':setup.get,
+        'options' :[
+            'testFloat'
+        ]
+    },
+    '===',
+    3.14
+);
+
+nanoTest.add(
+    'check get array',
+    {
+        'function':setup.get,
+        'options' :[
+            'testArray'
+        ]
+    },
+    'j==',
+    ['tarray', 'parray']
+);
+
+nanoTest.add(
+    'check get select',
+    {
+        'function':setup.get,
+        'options' :[
+            'testSelect'
+        ]
+    },
+    '===',
+    'tarray'
+);
+
+
+nanoTest.add(
+    'check get list',
+    {
+        'function':setup.get,
+        'options' :[
+            'testList'
+        ]
+    },
+    'j==',
+    ['tarray','parray']
+);
 
 
 nanoTest.run();
