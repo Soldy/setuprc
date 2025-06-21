@@ -22,6 +22,6 @@
   },
   "dependencies": {
     "clonerc": "0.0.5",
-    "typehardeningrc": "1.0.0"
+    "typehardeningrc": "0.9.9-beta20"
   }
 }
