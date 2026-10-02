@@ -20,9 +20,9 @@ const SetupBase = function (setup_in){
             throw Error(
                 'Undefined setup option name'
             );
-        if(typeof _setup[name] === 'undefined')
+        if(!_setup.hasOwnProperty(name))
             throw Error(
-                'Undefined setup option'
+                'Undefined setup option "'+name+'"'
             );
         return $clonerc.faster(
             _setup[name]
@@ -32,16 +32,16 @@ const SetupBase = function (setup_in){
      * set multiple options interface
      * @param {object} settings
      * @public
-     * @return {any}
+     * @return {bool}
      */
     this.setup = function(settings){
-        let out = true;
-        if(typeof settings.all === 'function')
-            settings = settings.all();
         for(let i in settings)
-            if(_set(i, settings[i]) === false)
-                out = false;
-        return out;
+            if(settings.hasOwnProperty(i))
+                _check(i, settings[i]);
+        for(let i in settings)
+            if(settings.hasOwnProperty(i))
+                _set(i, settings[i]);
+        return true
     };
     /*
      * set on option interface
@@ -52,9 +52,10 @@ const SetupBase = function (setup_in){
      */
     this.set = function(type, value){
         if(typeof type === 'undefined')
-            return false;
+            throw Error('Setuprs set type undefined');
         if(typeof value === 'undefined')
-            return false;
+            throw Error('Setuprs set value undefined');
+        _check(type,value);
         return _set(type,value);
     };
     /*
@@ -64,9 +65,8 @@ const SetupBase = function (setup_in){
     this.all = function(){
         let out = {};
         for(let i in _setup)
-            out[i] = $clonerc.faster(
-                _setup[i]
-            );
+            if(_setup.hasOwnProperty(i))
+                out[i] = this.get(i);
         return out;
     };
     /*
@@ -83,18 +83,13 @@ const SetupBase = function (setup_in){
      * @private
      * @return {any}
      */
-    const _set = function(type, value){
+    const _check = function(type, value){
         // set not exist
         if ( typeof _setup_types[type] === 'undefined')
             throw Error('Setup option not exist');
         // is constant ? 
-        if (
-            ( _setup_types[type]['set'] ) &&
-            ( _setup_types[type]['const'] )
-        )
-            return Error('');
 
-        // type check 
+        // type check and validation
         if (
             $typeHardening.check(
                 _setup_types[type],
@@ -102,12 +97,28 @@ const SetupBase = function (setup_in){
             ) === false
         )
             throw TypeError(
-                'The type is  "'+
+                'The "'+
+                type
+                +'" type is  "'+
                 (typeof value)+
                 '" but "'+
-                _setup_types[type]+
+                _setup_types[type].type+
                 '" requested'
             );
+        if (
+            ( _setup_types[type]['set'] ) &&
+            ( _setup_types[type]['const'] )
+        )
+            throw Error('Option "'+type+'" is constant.');
+    }
+    /*
+     * set on option function
+     * @param {string} type 
+     * @param {any} value
+     * @private
+     * @return {any}
+     */
+    const _set = function(type, value){
         // type set
         _setup[type] = $clonerc.faster(value);
         _setup_types[type]['set'] = true;
@@ -119,12 +130,13 @@ const SetupBase = function (setup_in){
      */
     const _reset = function(){
         for (let i in _setup_types)
-            _set(
-                i,
-                $typeHardening.getDefault(
-                    _setup_types[i]
-                )
-            );
+            if(_setup_types.hasOwnProperty(i))
+                _set(
+                    i,
+                    $typeHardening.getDefault(
+                        _setup_types[i]
+                    )
+                );
     }
     /*
      * short deffination extender
@@ -148,17 +160,19 @@ const SetupBase = function (setup_in){
      * @private
      * @var {object}
      */
-    let _setup_types = setup_in;
+    let _setup_types = $clonerc.faster(setup_in);
     /*
      * @private
      * @var {object}
      */
     for (let i in _setup_types){
+        if(!_setup_types.hasOwnProperty(i))
+            throw Error('Setuprc init type extend error');
         _setup_types[i] = _typeExtend(
             _setup_types[i]
         );
         if(typeof _setup_types[i]['default'] !== 'undefined')
-            _setup[i] = _setup_types[i]['default'];
+            _setup[i] = $clonerc.faster(_setup_types[i]['default']);
     }
 };
 

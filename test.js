@@ -1,5 +1,4 @@
 #!/usr/bin/nodejs
-
 'use strict';
 
 const nanoTest  = new (require('nanoTest')).test({
@@ -77,8 +76,7 @@ nanoTest.add(
         'options' :[
         ]
     },
-    '===',
-    false 
+    'error'
 );
 
 nanoTest.add(
@@ -89,8 +87,7 @@ nanoTest.add(
             'testList'
         ]
     },
-    '===',
-    false 
+    'error'
 );
 
 
